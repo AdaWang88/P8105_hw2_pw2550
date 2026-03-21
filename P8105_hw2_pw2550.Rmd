@@ -9,6 +9,24 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 
 # library
-library(moderndive)
-library(ggplot2)
+library(tidyverse)
 ```
+
+# Problem 1
+
+Import data
+
+```{r}
+pols_month = 
+  read_csv("./data/fivethirtyeight_datasets/pols-month.csv") %>% 
+  janitor::clean_names() %>% 
+  separate(mon, into = c("year", "month", "day"), sep = "-", convert = TRUE) %>% # automatically converts to integers
+  mutate(month = month.name[month]) %>% 
+  mutate(president = case_when(prez_gop == 1 ~ "gop",
+                               prez_dem == 1 ~ "dem",
+                               TRUE ~ NA)) %>% 
+  dplyr::select(-prez_gop, -prez_dem, -day)
+
+
+```
+
