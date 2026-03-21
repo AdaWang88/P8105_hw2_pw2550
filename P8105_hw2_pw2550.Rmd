@@ -27,6 +27,13 @@ pols_month =
                                TRUE ~ NA)) %>% 
   dplyr::select(-prez_gop, -prez_dem, -day)
 
-
+snp = 
+  read_csv("./data/fivethirtyeight_datasets/snp.csv") %>% 
+  janitor::clean_names() %>% 
+  separate(date, into = c("month", "day", "year"), sep = "/", convert = TRUE) %>% 
+  mutate(year = ifelse(year <= 15, year + 2000, year + 1900)) %>% 
+  arrange(year, month) %>% 
+  mutate(month = month.name[month]) %>% 
+  relocate(year, month)
 ```
 
