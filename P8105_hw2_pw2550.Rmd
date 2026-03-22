@@ -47,5 +47,15 @@ unemployment =
   mutate(month = str_to_sentence(month))
 ```
 
+Merge
+
+```{r}
+# merge snp to pols
+merge = 
+  pols_month %>% 
+  left_join(snp, by = c("year", "month")) %>% 
+  left_join(unemployment, by = c("year", "month"))
+```
+
 
 
