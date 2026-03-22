@@ -57,5 +57,16 @@ merge =
   left_join(unemployment, by = c("year", "month"))
 ```
 
+# Problem 2
+
+```{r}
+trash = 
+  readxl::read_excel("./data/202509 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", range = "A2:M709") %>% 
+  janitor::clean_names() %>% 
+  filter(!is.na(dumpster)) %>% 
+  mutate(sports_balls = as.integer(round(sports_balls, digits = 0)))
+```
+
+
 
 
